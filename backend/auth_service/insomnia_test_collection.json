@@ -1,0 +1,459 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-07-24T11:30:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "req_health_check",
+      "parentId": "fld_auth_service",
+      "modified": 1690200000000,
+      "created": 1690200000000,
+      "url": "{{ _.base_url }}/api/health/",
+      "name": "1. Health Check",
+      "description": "Kiểm tra trạng thái service",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1690200000000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_register",
+      "parentId": "fld_auth_service",
+      "modified": 1690200001000,
+      "created": 1690200001000,
+      "url": "{{ _.base_url }}/api/auth/register/",
+      "name": "2. Register User",
+      "description": "Đăng ký user mới",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.test_email }}\",\n  \"password\": \"{{ _.test_password }}\",\n  \"password_confirm\": \"{{ _.test_password }}\",\n  \"first_name\": \"Test\",\n  \"last_name\": \"User\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690200001000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_login",
+      "parentId": "fld_auth_service",
+      "modified": 1690200002000,
+      "created": 1690200002000,
+      "url": "{{ _.base_url }}/api/auth/login/",
+      "name": "3. Login User",
+      "description": "Đăng nhập và lấy JWT tokens",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.test_email }}\",\n  \"password\": \"{{ _.test_password }}\",\n  \"device_id\": \"insomnia_test\",\n  \"device_name\": \"Insomnia Test Client\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690200002000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_me",
+      "parentId": "fld_auth_service",
+      "modified": 1690200003000,
+      "created": 1690200003000,
+      "url": "{{ _.base_url }}/api/auth/me/",
+      "name": "4. Get Current User",
+      "description": "Lấy thông tin user hiện tại (cần access token)",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690200003000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_update_me",
+      "parentId": "fld_auth_service",
+      "modified": 1690200004000,
+      "created": 1690200004000,
+      "url": "{{ _.base_url }}/api/auth/me/",
+      "name": "5. Update Current User",
+      "description": "Cập nhật thông tin user hiện tại",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"first_name\": \"Updated\",\n  \"last_name\": \"Name\",\n  \"phone_number\": \"+84123456789\",\n  \"avatar\": \"https://example.com/avatar.jpg\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690200004000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_refresh_token",
+      "parentId": "fld_auth_service",
+      "modified": 1690200005000,
+      "created": 1690200005000,
+      "url": "{{ _.base_url }}/api/auth/refresh/",
+      "name": "6. Refresh Token",
+      "description": "Làm mới access token bằng refresh token",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"refresh_token\": \"{{ _.refresh_token }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690200005000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_google_oauth_url",
+      "parentId": "fld_google_oauth",
+      "modified": 1690200006000,
+      "created": 1690200006000,
+      "url": "{{ _.base_url }}/api/auth/google/url/",
+      "name": "7. Get Google OAuth URL",
+      "description": "Lấy URL để redirect đến Google OAuth",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"state\": \"insomnia_test_{{ _.timestamp }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690200006000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_google_oauth_callback",
+      "parentId": "fld_google_oauth",
+      "modified": 1690200007000,
+      "created": 1690200007000,
+      "url": "{{ _.base_url }}/api/auth/google/callback/",
+      "name": "8. Google OAuth Callback",
+      "description": "Xử lý callback từ Google OAuth (cần code từ Google)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"code\": \"{{ _.google_auth_code }}\",\n  \"state\": \"insomnia_test_{{ _.timestamp }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690200007000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_password_reset_request",
+      "parentId": "fld_password_management",
+      "modified": 1690200008000,
+      "created": 1690200008000,
+      "url": "{{ _.base_url }}/api/auth/password/reset/request/",
+      "name": "9. Request Password Reset",
+      "description": "Yêu cầu reset password",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.test_email }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690200008000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_change_password",
+      "parentId": "fld_password_management",
+      "modified": 1690200009000,
+      "created": 1690200009000,
+      "url": "{{ _.base_url }}/api/auth/password/change/",
+      "name": "10. Change Password",
+      "description": "Đổi password (cần đăng nhập)",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"old_password\": \"{{ _.test_password }}\",\n  \"new_password\": \"{{ _.new_password }}\",\n  \"new_password_confirm\": \"{{ _.new_password }}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690200009000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_logout",
+      "parentId": "fld_auth_service",
+      "modified": 1690200010000,
+      "created": 1690200010000,
+      "url": "{{ _.base_url }}/api/auth/logout/",
+      "name": "11. Logout",
+      "description": "Đăng xuất và blacklist tokens",
+      "method": "POST",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.access_token }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690200010000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_register_duplicate",
+      "parentId": "fld_negative_tests",
+      "modified": 1690200011000,
+      "created": 1690200011000,
+      "url": "{{ _.base_url }}/api/auth/register/",
+      "name": "❌ Register Duplicate Email",
+      "description": "Test đăng ký với email đã tồn tại",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.test_email }}\",\n  \"password\": \"{{ _.test_password }}\",\n  \"password_confirm\": \"{{ _.test_password }}\",\n  \"first_name\": \"Duplicate\",\n  \"last_name\": \"User\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690200011000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_login_wrong_password",
+      "parentId": "fld_negative_tests",
+      "modified": 1690200012000,
+      "created": 1690200012000,
+      "url": "{{ _.base_url }}/api/auth/login/",
+      "name": "❌ Login Wrong Password",
+      "description": "Test đăng nhập với password sai",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"{{ _.test_email }}\",\n  \"password\": \"wrongpassword123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690200012000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_me_no_token",
+      "parentId": "fld_negative_tests",
+      "modified": 1690200013000,
+      "created": 1690200013000,
+      "url": "{{ _.base_url }}/api/auth/me/",
+      "name": "❌ Get Me Without Token",
+      "description": "Test truy cập /me không có token",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1690200013000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "req_refresh_invalid_token",
+      "parentId": "fld_negative_tests",
+      "modified": 1690200014000,
+      "created": 1690200014000,
+      "url": "{{ _.base_url }}/api/auth/refresh/",
+      "name": "❌ Refresh Invalid Token",
+      "description": "Test refresh với token không hợp lệ",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"refresh_token\": \"invalid_token_12345\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1690200014000,
+      "isPrivate": false,
+      "_type": "request"
+    },
+    {
+      "_id": "fld_auth_service",
+      "parentId": "wrk_auth_service",
+      "modified": 1690200000000,
+      "created": 1690200000000,
+      "name": "🔐 Authentication",
+      "description": "Basic authentication endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1690200000000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_google_oauth",
+      "parentId": "wrk_auth_service",
+      "modified": 1690200001000,
+      "created": 1690200001000,
+      "name": "🌐 Google OAuth",
+      "description": "Google OAuth endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1690200001000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_password_management",
+      "parentId": "wrk_auth_service",
+      "modified": 1690200002000,
+      "created": 1690200002000,
+      "name": "🔑 Password Management",
+      "description": "Password reset and change endpoints",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1690200002000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_negative_tests",
+      "parentId": "wrk_auth_service",
+      "modified": 1690200003000,
+      "created": 1690200003000,
+      "name": "❌ Negative Tests",
+      "description": "Error cases and validation tests",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1690200003000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_auth_service",
+      "parentId": null,
+      "modified": 1690200000000,
+      "created": 1690200000000,
+      "name": "Auth Service API",
+      "description": "Complete test collection for Auth Service",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_base",
+      "parentId": "wrk_auth_service",
+      "modified": 1690200000000,
+      "created": 1690200000000,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:8000",
+        "test_email": "test@example.com",
+        "test_password": "testpassword123",
+        "new_password": "newpassword123",
+        "timestamp": "{% now 'unix' %}",
+        "access_token": "",
+        "refresh_token": "",
+        "google_auth_code": ""
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_url",
+          "test_email", 
+          "test_password",
+          "new_password",
+          "timestamp",
+          "access_token",
+          "refresh_token",
+          "google_auth_code"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1690200000000,
+      "_type": "environment"
+    }
+  ]
+}
